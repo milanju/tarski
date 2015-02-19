@@ -14,4 +14,12 @@ Meteor.startup(function () {
   }
 
   Session.set("board", board);
+
+  var rules = [];
+  for(i = 1; i <= 15; i++){
+
+    rules.push({id: i, rule: ""});
+  }
+
+  Session.set("rules", rules);
 });

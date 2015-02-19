@@ -1,0 +1,10 @@
+<template name="rules">
+  <div id="rules-div" class="well">
+    <center><h4>Rules</h4></center>
+    <ul id="rule-list">
+    {{#each rules}}
+      <li>{{space}}{{this.id}}: <input class="rule-input" type="text" value="{{this.rule}}"></li>
+    {{/each}}
+    </ul>
+  </div>
+</template>
