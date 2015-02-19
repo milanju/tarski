@@ -1,0 +1,134 @@
+#letter-button-row{
+  background-color: #141414;
+  padding: 5px 5px 10px 5px;
+}
+
+#shape-buttons-row{
+  padding: 5px 5px 10px 5px;
+}
+
+#shape-container{
+  background-color: #141414;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#size-buttons-row{
+  padding: 5px 5px 10px 5px;
+}
+
+#size-container{
+  background-color: #141414;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#itemcp-div{
+  width: 500px;
+}
+
+#square-button{
+  background-image: url("/images/square-40x40.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#triangle-button{
+  background-image: url("/images/triangle-40x40.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#pentagon-button{
+  background-image: url("/images/pentagon-40x40.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.col-div{
+  float: left;
+}
+
+.letter-button{
+  width: 40px;
+  height: 40px;
+  border: solid 1px #6DD9FF;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  font-weight: bold;
+  font-size: 12pt;
+  margin: 0 20px;
+}
+
+.shape-button{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 50px;
+  height: 50px;
+  border: solid 1px #6DD9FF;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 60px;
+  margin: 0 4px;
+}
+
+.size-button{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 50px;
+  height: 50px;
+  border: solid 1px #6DD9FF;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  margin: 0 4px;
+  font-weight: bold;
+  font-size: 12pt;
+}
+#triangle-shape{
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid red;
+  position: absolute;
+  left: 4px;
+  top: 3px;
+}
+
+#square-shape{
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  position: absolute;
+  left: 4px;
+  top: 5px;
+}
+
+#pentagon {
+ margin:70px 0 5px 20px;
+ position: relative;
+ width: 110px;
+ border-width: 100px 36px 0;
+ border-style: solid;
+ border-color: #abefcd transparent;
+}
+#pentagon:before {
+ content: "";
+ position: absolute;
+ height: 0;
+ width: 0;
+ top: -170px;
+ left: -36px;
+ border-width: 0 90px 70px;
+ border-style: solid;
+ border-color: transparent transparent #abefcd;
+}
+
+.selected{
+  background-color: #6DD9FF;
+  color: #000;
+}

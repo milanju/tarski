@@ -1,0 +1,17 @@
+Meteor.startup(function () {
+  Session.set("selectedLetter", "a-button");
+  Session.set("selectedShape", "erase-button");
+  Session.set("selectedSize", "small-button");
+
+  var board = [];
+  for(i = 1; i < 65; i++){
+    board.push({
+      id: i,
+      shape: "none",
+      size: "none",
+      letter: "none"
+    });
+  }
+
+  Session.set("board", board);
+});

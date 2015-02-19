@@ -1,8 +1,12 @@
 <template name="board">
-  {{#each board}}
-    <div class="board-field {{bgcolor}}">
-
-    </div>
-    {{#if newLine}}<br>{{/if}}
-  {{/each}}
+  <div id="board-div" class="well">
+    <center>
+    {{#each board}}
+      <div class="board-field {{bgcolor}} {{this.shape}}-{{this.size}}" value="{{this.id}}">
+       {{#if letterIsSet}}<div class="field-letter">{{this.letter}}</div>{{/if}}
+      </div>
+      {{#if newLine}}<br>{{/if}}
+    {{/each}}
+    </center>
+  </div>
 </template>

@@ -1,13 +1,6 @@
 Template.board.helpers({
   board: function(){
-    var board = [];
-    for(i = 1; i < 65; i++){
-      board.push({
-        id: i,
-        item: "none"
-      });
-    }
-    return board;
+    return Session.get("board");
   },
   newLine: function(){
     if(this.id % 8 === 0){
@@ -33,5 +26,26 @@ Template.board.helpers({
       counter++;
     }
     return result;
+  },
+  letterIsSet: function(){
+    if(this.letter !== "none") return true;
+      else return false;
+  }
+});
+
+Template.board.events({
+  "click .board-field": function(event, template){
+    var result = "";
+    var board = Session.get("board");
+    if(Session.get("selectedShape") !== "none" && Session.get("selectedShape") !== "erase-button"){
+      board[this.id-1].shape = Session.get("selectedShape").split("-")[0];
+      board[this.id-1].letter = Session.get("selectedLetter").split("-")[0];
+      board[this.id-1].size = Session.get("selectedSize").split("-")[0];
+    } else if(Session.get("selectedShape") === "erase-button"){
+      board[this.id-1].shape = "none";
+      board[this.id-1].letter = "none";
+      board[this.id-1].size = "none";
+    }
+    Session.set("board", board);
   }
 });

@@ -1,1 +1,87 @@
-<template name="itemcp"></template>
+<template name="itemcp">
+  <div id="itemcp-div" class="well">
+      <div id="letter-button-row" class="row">
+        <div id="letter-button-title" class="row">
+          <div class="col-md-12"><center>Letter</center></div>
+        </div>
+        <div class="row" id="button-container">
+          <div class="col-md-12">
+            <div class="col-div">
+              <div class="letterButton letter-button {{selectedLetter 'a-button'}}" id="a-button" value="a">a</div>
+            </div>
+            <div class="col-div">
+              <div class="letterButton letter-button {{selectedLetter 'b-button'}}" id="b-button">b</div>
+            </div>
+            <div class="col-div">
+              <div class="letter-button {{selectedLetter 'c-button'}}" id="c-button">c</div>
+            </div>
+            <div class="col-div">
+              <div class="letter-button {{selectedLetter 'd-button'}}" id="d-button">d</div>
+            </div>
+            <div class="col-div">
+              <div class="letter-button {{selectedLetter 'e-button'}}" id="e-button">e</div>
+            </div>
+            <div class="col-div">
+              <div class="letter-button {{selectedLetter 'f-button'}}" id="f-button">f</div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6" id="shape-container">
+        <div id="shape-buttons-row" class="row">
+          <div class="row">
+            <div class="col-md-12">
+              Shape
+            </div>
+          </div>
+        <div class="row" id="shape-buttons">
+          <div class="col-md-12">
+            <div class="col-div">
+              <div class="shape-button {{selectedShape 'erase-button'}}" id="erase-button">
+              <i class="fa fa-eraser fa-2x"></i>
+              </div>
+            </div>
+            <div class="col-div">
+              <div class="shape-button {{selectedShape 'triangle-button'}}" id="triangle-button">
+              </div>
+            </div>
+            <div class="col-div">
+              <div class="shape-button {{selectedShape 'square-button'}}" id="square-button">
+              </div>
+            </div>
+            <div class="col-div">
+              <div class="shape-button {{selectedShape 'pentagon-button'}}" id="pentagon-button">
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div id="size-container" class="col-md-5">
+        <div class="row" id="size-buttons-row">
+          <div class="row" id="size-buttons">
+            <div class="col-md-12">
+              Size
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-div">
+                <div class="size-button {{selectedSize 'small-button'}}" id="small-button">S</div>
+              </div>
+              <div class="col-div">
+                <div class="size-button {{selectedSize 'medium-button'}}" id="medium-button">M</div>
+              </div>
+              <div class="col-div">
+                <div class="size-button {{selectedSize 'large-button'}}" id="large-button">L</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
