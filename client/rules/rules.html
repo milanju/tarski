@@ -3,8 +3,28 @@
     <center><h4>Rules</h4></center>
     <ul id="rule-list">
     {{#each rules}}
-      <li>{{space}}{{this.id}}: <input class="rule-input" type="text" value="{{this.rule}}"></li>
+      <li>{{space}}{{this.id}}: <input class="rule-input {{this.validation}}" type="text" value="{{this.rule}}">
+      {{#if isEmpty}}
+      {{else}}
+        {{#if isInvalidSyntax}}
+          <i class="fa fa-exclamation-triangle invalid-syntax"></i>
+        {{else}}
+          {{#if isInvalid}}
+            <i class="fa fa-close invalid"></i>
+          {{else}}
+            {{#if isValid}}
+            <i class="fa fa-check valid"></i>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      {{/if}}
+      </li>
     {{/each}}
     </ul>
+    {{#if allValid}}
+      <center><i class="fa fa-check fa-4x allValid"></i></center>
+    {{else}}
+      <center><i class="fa fa-close fa-4x allInvalid"></i></center>
+    {{/if}}
   </div>
 </template>

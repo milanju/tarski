@@ -18,7 +18,7 @@ Meteor.startup(function () {
   var rules = [];
   for(i = 1; i <= 15; i++){
 
-    rules.push({id: i, rule: ""});
+    rules.push({id: i, rule: "", validation: "empty"});
   }
 
   Session.set("rules", rules);
