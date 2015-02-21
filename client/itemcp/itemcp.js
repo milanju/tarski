@@ -6,7 +6,11 @@ Template.itemcp.helpers({
     if(btn === Session.get("selectedShape")) return "selected";
   },
   selectedSize: function(btn){
-    if(btn === Session.get("selectedSize")) return "selected";
+    if(btn === Session.get("selectedSize")){
+      if(btn === 'small-button') return 'selected-small';
+      if(btn === 'medium-button') return 'selected-medium';
+      if(btn === 'large-button') return 'selected-large';
+    }
   }
 });
 Template.itemcp.events({
