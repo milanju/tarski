@@ -1,14 +1,160 @@
-validate = function(rule){
-  if(rule === "") return "empty";
-    else if(!validateSyntax(rule)) return "invalid-syntax";
-    else if(true) return "invalid";
-    else if(true) return "valid";
+validate = function(input){
+  var rule = removeSpaces(input);
+  if(validateSyntax(rule)){
+    var ruleArray = rule.split(" ");
+    var binaryArray = [];
+    var result = true;
+    for(i = 0; i < ruleArray.length; i++){
+      binaryArray.push(validateFunction(ruleArray[i]));
+    }
+    for(j = 0; j < binaryArray.length; j++){
+      if(binaryArray[j] === false) result = false;
+    }
+    if(result === true) return "valid";
+    if(result === false) return "invalid";
+  } else return "invalid-syntax";
 };
 
-validateSyntax = function(rule){
+validateFunction = function(f){
+  var board = Session.get("board");
+
+  // Check for Triangle(x)
+  if(f.substr(0, 8) === "Triangle"){
+    var letter = (f.split("(")[1]).split(")")[0];
+    for(i = 0; i < board.length; i++){
+      if(board[i].shape === "triangle" && board[i].letter === letter) return true;
+    }
+  }
+
+  // Check for Square(x)
+  if(f.substr(0, 6) === "Square"){
+    var letter = (f.split("(")[1]).split(")")[0];
+    for(i = 0; i < board.length; i++){
+      if(board[i].shape === "square" && board[i].letter === letter) return true;
+    }
+  }
+
+  // Check for Pentagon(x)
+  if(f.substr(0, 8) === "Pentagon"){
+    var letter = (f.split("(")[1]).split(")")[0];
+    for(i = 0; i < board.length; i++){
+      if(board[i].shape === "pentagon" && board[i].letter === letter) return true;
+    }
+  }
+
+  // Check for Small(x)
+  if(f.substr(0, 5) === "Small"){
+    var letter = (f.split("(")[1]).split(")")[0];
+    for(i = 0; i < board.length; i++){
+      if(board[i].size === "small" && board[i].letter === letter) return true;
+    }
+  }
+
+  // Check for Medium(x)
+  if(f.substr(0, 6) === "Medium"){
+    var letter = (f.split("(")[1]).split(")")[0];
+    for(i = 0; i < board.length; i++){
+      if(board[i].size === "medium" && board[i].letter === letter) return true;
+    }
+  }
+
+  // Check for Large(x)
+  if(f.substr(0, 6) === "Large"){
+    var letter = (f.split("(")[1]).split(")")[0];
+    for(i = 0; i < board.length; i++){
+      if(board[i].size === "large" && board[i].letter === letter) return true;
+    }
+  }
+
+  // Check for LeftOf(x, y)
+  if(f.substr(0, 6) === "LeftOf"){
+    var x = f.split("(")[1][0];
+    var y = f.split(")")[0][f.length-2];
+    var xloc;
+    var yloc;
+    for(i = 0; i < board.length; i++){
+      if(board[i].letter === x) xloc = board[i].id;
+      if(board[i].letter === y) yloc = board[i].id;
+    }
+    if(xloc % 8 < yloc % 8) return true;
+  }
+
+  // Check for RightOf(x, y)
+  if(f.substr(0, 7) === "RightOf"){
+    var x = f.split("(")[1][0];
+    var y = f.split(")")[0][f.length-2];
+    var xloc;
+    var yloc;
+    for(i = 0; i < board.length; i++){
+      if(board[i].letter === x) xloc = board[i].id;
+      if(board[i].letter === y) yloc = board[i].id;
+    }
+    if(xloc % 8 > yloc % 8) return true;
+  }
+
+  // Check for BelowOf(x, y)
+  if(f.substr(0, 7) === "BelowOf"){
+    var x = f.split("(")[1][0];
+    var y = f.split(")")[0][f.length-2];
+    var xloc;
+    var yloc;
+    for(i = 0; i < board.length; i++){
+      if(board[i].letter === x) xloc = board[i].id;
+      if(board[i].letter === y) yloc = board[i].id;
+    }
+    xloc -= xloc % 8;
+    yloc -= yloc % 8;
+    var xrow = xloc / 8;
+    var yrow = yloc / 8;
+    if(xrow > yrow) return true;
+  }
+
+  // Check for AboveOf(x, y)
+  if(f.substr(0, 7) === "AboveOf"){
+    var x = f.split("(")[1][0];
+    var y = f.split(")")[0][f.length-2];
+    var xloc;
+    var yloc;
+    for(i = 0; i < board.length; i++){
+      if(board[i].letter === x) xloc = board[i].id;
+      if(board[i].letter === y) yloc = board[i].id;
+    }
+    xloc -= xloc % 8;
+    yloc -= yloc % 8;
+    var xrow = xloc / 8;
+    var yrow = yloc / 8;
+    if(xrow < yrow) return true;
+  }
+
+  return false;
+};
+
+validateSyntax = function(input){
+  var rule = input;
   var ruleArray = rule.split(" ");
+  for(i = 0; i < ruleArray.length; i++){
+    isValidWord()
+  }
+  return true;
 };
 
+removeSpaces = function(input){
+  var mode = false;
+  var substr1;
+  var substr2;
+  var newstr;
+  for(i = 0; i < input.length; i++){
+    if(input[i] === "(") mode = true;
+    if(input[i] === ")") mode = false;
+    if(mode = true && input[i] === " "){
+      substr1 = input.substr(0, i);
+      substr2 = input.substr(i+1, input.length-1);
+      newstr = substr1 + substr2;
+      return removeSpaces(newstr);
+    }
+  }
+  return input;
+}
 //Validation Helpers START
 isQuantor = function(s){
   if(s === "E" || s === "A") return true;
@@ -67,8 +213,8 @@ Template.rules.helpers({
 Template.rules.events({
   "input .rule-input": function(event, template){
     var rules = Session.get("rules");
-    rules[this.id-1].rule = event.target.value;
-    rules[this.id-1].validation = validate(rules[this.id-1].rule);
+    rules[this.id].rule = event.target.value;
+    rules[this.id].validation = validate(rules[this.id].rule);
     Session.set("rules", rules);
   }
 });

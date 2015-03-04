@@ -3,7 +3,7 @@ Template.board.helpers({
     return Session.get("board");
   },
   newLine: function(){
-    if(this.id % 8 === 0){
+    if(this.id % 8 === 7){
       return true;
     } else return false;
   },
@@ -11,7 +11,7 @@ Template.board.helpers({
     var mode = true;
     var counter = 0;
     var result;
-    for(i = 0; i < this.id; i++){
+    for(i = 0; i <= this.id; i++){
       if(counter === 8) {
         mode = !mode;
         counter = 0;
@@ -38,14 +38,27 @@ Template.board.events({
     var result = "";
     var board = Session.get("board");
     if(Session.get("selectedShape") !== "none" && Session.get("selectedShape") !== "erase-button"){
-      board[this.id-1].shape = Session.get("selectedShape").split("-")[0];
-      board[this.id-1].letter = Session.get("selectedLetter").split("-")[0];
-      board[this.id-1].size = Session.get("selectedSize").split("-")[0];
+      board[this.id].shape = Session.get("selectedShape").split("-")[0];
+      board[this.id].letter = Session.get("selectedLetter").split("-")[0];
+      board[this.id].size = Session.get("selectedSize").split("-")[0];
     } else if(Session.get("selectedShape") === "erase-button"){
-      board[this.id-1].shape = "none";
-      board[this.id-1].letter = "none";
-      board[this.id-1].size = "none";
+      board[this.id].shape = "none";
+      board[this.id].letter = "none";
+      board[this.id].size = "none";
     }
     Session.set("board", board);
+
+    // Validate Ruleset
+    var rules = Session.get("rules");
+    for(i = 0; i < rules.length; i++){
+      if(rules[i].rule !== "")
+        rules[i].validation = validate(rules[i].rule);
+    }
+    Session.set("rules", rules);
+    var element = $(".board-field");
+    element.addClass("animated");
+    element.addClass("bounceInLeft");
+    //element.removeClass("animated");
+    //element.removeClass("bounceInLeft");
   }
 });
