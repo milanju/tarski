@@ -55,10 +55,5 @@ Template.board.events({
         rules[i].validation = validate(rules[i].rule);
     }
     Session.set("rules", rules);
-    var element = $(".board-field");
-    element.addClass("animated");
-    element.addClass("bounceInLeft");
-    //element.removeClass("animated");
-    //element.removeClass("bounceInLeft");
   }
 });
