@@ -130,7 +130,7 @@ validateSyntax = function(input){
   var rule = input;
   var ruleArray = rule.split(" ");
   for(i = 0; i < ruleArray.length; i++){
-    if(!isValidWord()) return false;
+    if(!isValidWord(ruleArray[i])) return false;
   }
   return true;
 };
@@ -150,6 +150,7 @@ removeSpaces = function(input){
       return removeSpaces(newstr);
     }
   }
+  console.log(input);
   return input;
 };
 //Validation Helpers START
@@ -208,7 +209,7 @@ Template.rules.helpers({
 });
 
 Template.rules.events({
-  "input .rule-input": function(event, template){
+  'input .rule-input': function (event, template) {
     var rules = Session.get("rules");
     rules[this.id].rule = event.target.value;
     rules[this.id].validation = validate(rules[this.id].rule);

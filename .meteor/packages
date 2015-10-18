@@ -7,7 +7,6 @@
 autopublish
 insecure
 less
-nemo64:bootstrap
 fortawesome:fontawesome
 natestrauser:animate-css
 standard-minifiers
@@ -24,3 +23,4 @@ random
 ejson
 spacebars
 check
+twbs:bootstrap
