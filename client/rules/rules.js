@@ -2,126 +2,20 @@ validate = function(input){
   var rule = removeSpaces(input);
   if(validateSyntax(rule)){
     var ruleArray = rule.split(" ");
-    var binaryArray = [];
-    var result = true;
-    for(i = 0; i < ruleArray.length; i++){
-      binaryArray.push(validateFunction(ruleArray[i]));
-    }
-    for(j = 0; j < binaryArray.length; j++){
-      if(binaryArray[j] === false) result = false;
-    }
+    var result = validateFunction(ruleArray);
     if(result === true) return "valid";
     if(result === false) return "invalid";
   } else return "invalid-syntax";
 };
 
-validateFunction = function(f){
+validateFunction = function(func){
+  console.log('FUNCTION:' + func);
   var board = Session.get("board");
-  var letter;
-  var xloc;
-  var yloc;
-  var x;
-  var y;
-
-  // Check for Triangle(x)
-  if(f.substr(0, 8) === "Triangle"){
-    letter = (f.split("(")[1]).split(")")[0];
-    for(i = 0; i < board.length; i++){
-      if(board[i].shape === "triangle" && board[i].letter === letter) return true;
-    }
+  if (func.length === 1) {
+    if (func[0] === true) return true;
   }
 
-  // Check for Square(x)
-  if(f.substr(0, 6) === "Square"){
-    letter = (f.split("(")[1]).split(")")[0];
-    for(i = 0; i < board.length; i++){
-      if(board[i].shape === "square" && board[i].letter === letter) return true;
-    }
-  }
-
-  // Check for Pentagon(x)
-  if(f.substr(0, 8) === "Pentagon"){
-    letter = (f.split("(")[1]).split(")")[0];
-    for(i = 0; i < board.length; i++){
-      if(board[i].shape === "pentagon" && board[i].letter === letter) return true;
-    }
-  }
-
-  // Check for Small(x)
-  if(f.substr(0, 5) === "Small"){
-    letter = (f.split("(")[1]).split(")")[0];
-    for(i = 0; i < board.length; i++){
-      if(board[i].size === "small" && board[i].letter === letter) return true;
-    }
-  }
-
-  // Check for Medium(x)
-  if(f.substr(0, 6) === "Medium"){
-    letter = (f.split("(")[1]).split(")")[0];
-    for(i = 0; i < board.length; i++){
-      if(board[i].size === "medium" && board[i].letter === letter) return true;
-    }
-  }
-
-  // Check for Large(x)
-  if(f.substr(0, 6) === "Large"){
-    letter = (f.split("(")[1]).split(")")[0];
-    for(i = 0; i < board.length; i++){
-      if(board[i].size === "large" && board[i].letter === letter) return true;
-    }
-  }
-
-  // Check for LeftOf(x, y)
-  if(f.substr(0, 6) === "LeftOf"){
-    x = f.split("(")[1][0];
-    y = f.split(")")[0][f.length-2];
-    for(i = 0; i < board.length; i++){
-      if(board[i].letter === x) xloc = board[i].id;
-      if(board[i].letter === y) yloc = board[i].id;
-    }
-    if(xloc % 8 < yloc % 8) return true;
-  }
-
-  // Check for RightOf(x, y)
-  if(f.substr(0, 7) === "RightOf"){
-    x = f.split("(")[1][0];
-    y = f.split(")")[0][f.length-2];
-    for(i = 0; i < board.length; i++){
-      if(board[i].letter === x) xloc = board[i].id;
-      if(board[i].letter === y) yloc = board[i].id;
-    }
-    if(xloc % 8 > yloc % 8) return true;
-  }
-
-  // Check for BelowOf(x, y)
-  if(f.substr(0, 7) === "BelowOf"){
-    x = f.split("(")[1][0];
-    y = f.split(")")[0][f.length-2];
-    for(i = 0; i < board.length; i++){
-      if(board[i].letter === x) xloc = board[i].id;
-      if(board[i].letter === y) yloc = board[i].id;
-    }
-    xloc -= xloc % 8;
-    yloc -= yloc % 8;
-    var xrow = xloc / 8;
-    var yrow = yloc / 8;
-    if(xrow > yrow) return true;
-  }
-
-  // Check for AboveOf(x, y)
-  if(f.substr(0, 7) === "AboveOf"){
-    x = f.split("(")[1][0];
-    y = f.split(")")[0][f.length-2];
-    for(i = 0; i < board.length; i++){
-      if(board[i].letter === x) xloc = board[i].id;
-      if(board[i].letter === y) yloc = board[i].id;
-    }
-    xloc -= xloc % 8;
-    yloc -= yloc % 8;
-    xrow = xloc / 8;
-    yrow = yloc / 8;
-    if(xrow < yrow) return true;
-  }
+  func = solvePredicates(func);
 
   return false;
 };

@@ -1,18 +1,19 @@
 isValidWord = function (word) {
   console.log(word);
+
   var letters = ['a', 'b', 'c', 'd', 'e', 'f'];
   var predicateOneArg = [
     'Triangle', 'Square', 'Pentagon',
     'Small', 'Medium', 'Large'
   ];
   var predicateTwoArgs = [
-    'SameSize', 'BackOf', 'LeftOf',
-    'RightOf', 'FrontOf', 'Adjoins',
+    'SameSize', 'BelowOf', 'LeftOf',
+    'RightOf', 'AboveOf', 'Adjoins',
     'SameCol', 'SameRow', 'Between',
     'Smaller', 'Larger', 'SameShape'
   ];
   var variables = ['x', 'y', 'z', 'u', 'v', 'w'];
-  var operatorSingle = ['!'];
+  // var operatorSingle = ['!'];
   var quantors = ['A', 'E'];
   var operatorsDuo = ['&&', '||', '=>', '<=>', '=', '!=', '_'];
 
@@ -36,6 +37,13 @@ isValidWord = function (word) {
     }
   }
 
-  // Check for
+  // Check for operators
+  var wordIsOperator = false;
+  operatorsDuo.forEach(function (op) {
+    if (word === op) wordIsOperator = true;
+  });
+  if (word === '!') return true;
+  if (wordIsOperator) return true;
+
   return false;
 }
