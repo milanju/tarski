@@ -4,4 +4,4 @@ This is a 2D implementation of [Tarski's World](https://en.wikipedia.org/wiki/Ta
 
 Live Demo available at http://tarski.meteor.com/.
 
-Note: Software still in development, it is NOT working (yet)!
+Note: Software still in development, not every feature works yet.
